@@ -1,0 +1,7 @@
+majerome.workshop_plugin.admin:
+  resource: "@MajeromeWorkshopPlugin/config/routing/admin.yaml"
+  prefix: '/%sylius_admin.path_name%'
+
+majerome.workshop_plugin.shop:
+  resource: "@MajeromeWorkshopPlugin/config/routing/shop.yaml"
+  prefix: /{_locale}
