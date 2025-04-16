@@ -1,0 +1,2 @@
+imports:
+  - { resource: "@MajeromeWorkshopPlugin/config/grids/*.yaml" }
