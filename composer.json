@@ -1,6 +1,7 @@
 {
-    "name": "majerome/workshop-plugin",
+    "name": "majerome/sylius-workshop-plugin",
     "type": "sylius-plugin",
+    "version": "1.0.0",
     "description": "Majerome workshop plugin for Sylius.",
     "keywords": [
         "sylius",

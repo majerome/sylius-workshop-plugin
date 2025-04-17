@@ -1,122 +1,67 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
-    </a>
+<h1 align="center">Majerome Sylius Workshop Plugin</h1> 
+
+<div align="center">
+
+![Sylius](https://img.shields.io/badge/sylius-1.13-brightgreen)
+![Packagist Version](https://img.shields.io/packagist/v/majerome/sylius-workshop-plugin)
+![Packagist Downloads](https://img.shields.io/packagist/dt/majerome/sylius-workshop-plugin)
+![Maintenance](https://img.shields.io/maintenance/no/2025)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+</div>
+
+![Sylius](https://sylius.com/wp-content/uploads/2021/03/sylius-logo_sylius-logo-light-1024x422.jpg)
+
+[Sylius Practical Mastery Course](https://academy.sylius.com/course/sylius-practical-mastery-course/)
+
+[Chapter 25.2 - How to create a Plugin](https://academy.sylius.com/lesson/25-2-how-to-create-a-plugin/)
+
+---
+
+<p>
+This plugin is the product of Sylius training. 
+It allows you to add a “Brand” entity, with those features :
+
+- Back Office Grid: creation, edition, deletion,
+- Assignment to a category "automotive" or "electronics.",
+- Workflow for brand validation by State Machine, 
+- Association brands-products, and listing of branded products.
 </p>
 
-<h1 align="center">Plugin Skeleton</h1>
+---
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
+## Installation
 
-## Documentation
+1. Add the plugin to your `composer.json` file:
+```
+composer require majerome/sylius-workshop-plugin --no-scripts
+```
 
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, that is full of examples.
+2. Empty the cache:
+```
+bin/console cache:clear
+```
+3. Apply the migrations:
+```
+bin/console sylius:migrations:diff
+```
+- Choose namespace ```
+[0] App\Migrations```  .
 
-## Quickstart Installation
+- Execute the migration:
+```
+[WARNING] You have 1 available migrations to execute.
+Are you sure you want to execute the migrations? (yes/no) [yes]:
+```
 
-### Traditional
+4. Load the fixtures:
+```
+bin/console sylius:fixtures:load -n
+```
 
-1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
+---
 
-2. From the plugin skeleton root directory, run the following commands:
+## Screenshots
 
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
-    
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
-    ```
+![Demo](https://raw.githubusercontent.com/majerome/sylius-workshop-plugin/master/docs/demo.png)
 
-To be able to set up a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
-
-### Docker
-
-1. Execute `docker compose up -d`
-
-2. Initialize plugin `docker compose exec app make init`
-
-3. See your browser `open localhost`
-
-## Usage
-
-### Running plugin tests
-
-  - PHPUnit
-
-    ```bash
-    vendor/bin/phpunit
-    ```
-
-  - PHPSpec
-
-    ```bash
-    vendor/bin/phpspec run
-    ```
-
-  - Behat (non-JS scenarios)
-
-    ```bash
-    vendor/bin/behat --strict --tags="~@javascript"
-    ```
-
-  - Behat (JS scenarios)
- 
-    1. [Install Symfony CLI command](https://symfony.com/download).
- 
-    2. Start Headless Chrome:
-    
-      ```bash
-      google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
-      ```
-    
-    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
-    
-      ```bash
-      symfony server:ca:install
-      APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
-      ```
-    
-    4. Run Behat:
-    
-      ```bash
-      vendor/bin/behat --strict --tags="@javascript"
-      ```
-    
-  - Static Analysis
-  
-    - Psalm
-    
-      ```bash
-      vendor/bin/psalm
-      ```
-      
-    - PHPStan
-    
-      ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
-      ```
-
-  - Coding Standard
-  
-    ```bash
-    vendor/bin/ecs check
-    ```
-
-### Opening Sylius with your plugin
-
-- Using `test` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
-    ```
-    
-- Using `dev` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
-    ```
