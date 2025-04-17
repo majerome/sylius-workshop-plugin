@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
 
 final class BrandHasCorrectType extends Constraint
 {
-    public string $message = 'majerome_workshop_plugin.brand.type.invalid';
+    public string $message = 'majerome_workshop.brand.type.invalid';
 
     public function validatedBy(): string
     {

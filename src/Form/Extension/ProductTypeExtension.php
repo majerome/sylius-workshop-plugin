@@ -18,8 +18,8 @@ final class ProductTypeExtension extends AbstractTypeExtension
         $builder->add('brand', EntityType::class, [
             'class' => Brand::class,
             'choice_label' => 'name',
-            'label' => 'majerome_workshop_plugin.form.product.brand',
-            'placeholder' => 'majerome_workshop_plugin.form.product.select_brand',
+            'label' => 'majerome_workshop.form.product.brand',
+            'placeholder' => 'majerome_workshop.form.product.select_brand',
             'query_builder' => fn (BrandRepositoryInterface $repository) => $repository->createEnabledQueryBuilder(),
         ]);
     }

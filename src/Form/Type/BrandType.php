@@ -19,20 +19,20 @@ final class BrandType extends AbstractResourceType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'majerome_workshop_plugin.form.brand.name',
+                'label' => 'majerome_workshop.form.brand.name',
             ])
             ->add('code', TextType::class, [
-                'label' => 'majerome_workshop_plugin.form.brand.code',
+                'label' => 'majerome_workshop.form.brand.code',
             ])
             ->add('type', ChoiceType::class, [
-                'label' => 'majerome_workshop_plugin.form.brand.type',
+                'label' => 'majerome_workshop.form.brand.type',
                 'choices' => [
-                    'majerome_workshop_plugin.form.brand.type_electronics' => BrandInterface::TYPE_ELECTRONICS,
-                    'majerome_workshop_plugin.form.brand.type_automotive' => BrandInterface::TYPE_AUTOMOTIVE,
+                    'majerome_workshop.form.brand.type_electronics' => BrandInterface::TYPE_ELECTRONICS,
+                    'majerome_workshop.form.brand.type_automotive' => BrandInterface::TYPE_AUTOMOTIVE,
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
-                'label' => 'majerome_workshop_plugin.form.brand.enabled',
+                'label' => 'majerome_workshop.form.brand.enabled',
             ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => BrandTranslationType::class,
