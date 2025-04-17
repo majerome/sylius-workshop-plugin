@@ -14,7 +14,7 @@ final class BrandTranslationType extends AbstractResourceType
     {
         $builder
             ->add('description', TextareaType::class, [
-                'label' => 'majerome_workshop_plugin.form.brand.description',
+                'label' => 'majerome_workshop.form.brand.description',
             ])
         ;
     }

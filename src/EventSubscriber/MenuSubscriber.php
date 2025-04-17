@@ -16,7 +16,7 @@ final class MenuSubscriber implements EventSubscriberInterface
         $catalog = $menu->getChild('catalog');
         $catalog
             ->addChild('majerome.workshop.brand', ['route' => 'majerome_workshop_admin_brand_index'])
-            ->setLabel('majerome_workshop_plugin.ui.brands')
+            ->setLabel('majerome_workshop.ui.brands')
             ->setLabelAttribute('icon', 'tags')
         ;
     }

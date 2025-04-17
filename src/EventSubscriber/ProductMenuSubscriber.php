@@ -16,7 +16,7 @@ final class ProductMenuSubscriber implements EventSubscriberInterface
         $menu
             ->addChild('brands')
             ->setAttribute('template', '@MajeromeWorkshopPlugin/Admin/Product/Tab/_brand.html.twig')
-            ->setLabel('majerome_workshop_plugin.ui.brands')
+            ->setLabel('majerome_workshop.ui.brands')
         ;
     }
 
