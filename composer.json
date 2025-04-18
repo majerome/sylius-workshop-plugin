@@ -1,7 +1,7 @@
 {
     "name": "majerome/sylius-workshop-plugin",
     "type": "sylius-plugin",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "description": "Majerome workshop plugin for Sylius.",
     "keywords": [
         "sylius",
@@ -80,13 +80,16 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php bin/create_node_symlink.php"
+            "php bin/create_node_symlink.php",
+            "php vendor/majerome/sylius-workshop-plugin/src/Installer/apply-patch.php"
         ],
         "post-update-cmd": [
-            "php bin/create_node_symlink.php"
+            "php bin/create_node_symlink.php",
+            "php vendor/majerome/sylius-workshop-plugin/src/Installer/apply-patch.php"
         ],
         "post-create-project-cmd": [
-            "php bin/create_node_symlink.php"
+            "php bin/create_node_symlink.php",
+            "php vendor/majerome/sylius-workshop-plugin/src/Installer/apply-patch.php"
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",

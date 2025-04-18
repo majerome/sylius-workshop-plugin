@@ -1,0 +1,105 @@
+Index: config/packages/_sylius.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/packages/_sylius.yaml b/config/packages/_sylius.yaml
+--- a/config/packages/_sylius.yaml	(revision 97011649764b6e9d9b4ebbf2ac0445d37ea908d8)
++++ b/config/packages/_sylius.yaml	(date 1744969128079)
+@@ -9,9 +9,15 @@
+     - { resource: "@SyliusPayPalPlugin/Resources/config/config.yaml" }
+     - { resource: "../parameters.yaml" }
+
++    - { resource: "@MajeromeWorkshopPlugin/config/config.yaml" }
++
+ parameters:
+     sylius_core.public_dir: '%kernel.project_dir%/public'
+
++# Enable state machine abstraction by the Symfony Workflow component
++sylius_state_machine_abstraction:
++    default_adapter: symfony_workflow
++
+ when@dev:
+     sylius_api:
+         enabled: true
+@@ -141,6 +147,7 @@
+         product:
+             classes:
+                 model: App\Entity\Product\Product
++                repository: App\Repository\ProductRepository
+             translation:
+                 classes:
+                     model: App\Entity\Product\ProductTranslation
+
+
+
+Index: src/Entity/Product/Product.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entity/Product/Product.php b/src/Entity/Product/Product.php
+--- a/src/Entity/Product/Product.php	(revision 97011649764b6e9d9b4ebbf2ac0445d37ea908d8)
++++ b/src/Entity/Product/Product.php	(date 1744968713187)
+@@ -5,6 +5,8 @@
+ namespace App\Entity\Product;
+
+ use Doctrine\ORM\Mapping as ORM;
++use Majerome\WorkshopPlugin\Entity\Product\ProductInterface;
++use Majerome\WorkshopPlugin\Entity\Product\ProductTrait;
+ use Sylius\Component\Core\Model\Product as BaseProduct;
+ use Sylius\Component\Product\Model\ProductTranslationInterface;
+
+@@ -14,8 +16,9 @@
+  */
+ #[ORM\Entity]
+ #[ORM\Table(name: 'sylius_product')]
+-class Product extends BaseProduct
++class Product extends BaseProduct implements ProductInterface
+ {
++    use ProductTrait;
+     protected function createTranslation(): ProductTranslationInterface
+     {
+         return new ProductTranslation();
+
+
+Index: src/Repository/ProductRepository.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Repository/ProductRepository.php b/src/Repository/ProductRepository.php
+new file mode 100644
+--- /dev/null	(date 1744969036309)
++++ b/src/Repository/ProductRepository.php	(date 1744969036309)
+@@ -0,0 +1,14 @@
++<?php
++
++declare(strict_types=1);
++
++namespace App\Repository;
++
++use Majerome\WorkshopPlugin\Repository\ProductRepositoryInterface;
++use Majerome\WorkshopPlugin\Repository\ProductRepositoryTrait;
++use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
++
++final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
++{
++    use ProductRepositoryTrait;
++}
+
+
+Index: config/routes.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/routes.yaml b/config/routes.yaml
+--- a/config/routes.yaml	(revision 97011649764b6e9d9b4ebbf2ac0445d37ea908d8)
++++ b/config/routes.yaml	(date 1744969332255)
+@@ -1,2 +1,4 @@
+ sylius_paypal_webhook:
+     resource: "@SyliusPayPalPlugin/Resources/config/webhook_routing.yaml"
++majerome_workshop_plugin:
++    resource: "@MajeromeWorkshopPlugin/config/routing.yaml"
+
