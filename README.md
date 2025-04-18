@@ -20,7 +20,7 @@
 
 <p>
 This plugin is the product of Sylius training. 
-It allows you to add a “Brand” entity, with those features :
+It allows you to add a custom “Brand” resource, with those features :
 
 - Back Office Grid: creation, edition, deletion,
 - Assignment to a category "automotive" or "electronics.",
@@ -30,34 +30,47 @@ It allows you to add a “Brand” entity, with those features :
 
 ---
 
-## Installation
+## Installation (Docker)
+>**Note:** Only tested on a **Sylius v1.13 Docker Project**
 
 1. Add the plugin to your `composer.json` file:
-```
-composer require majerome/sylius-workshop-plugin --no-scripts
-```
+    ```
+    docker compose exec php composer require majerome/sylius-workshop-plugin
+    ```
 
-2. Empty the cache:
-```
-bin/console cache:clear
-```
-3. Apply the migrations:
-```
-bin/console doctrine:migrations:diff
-```
-- Choose namespace ```
-[0] App\Migrations```  .
+2. Apply the git patch to set up the plugin:
+    ```
+    git apply vendor/majerome/sylius-workshop-plugin/src/Installer/majerome-workshop-plugin-sylius-1.13.patch
+    ```
 
-- Execute the migration:
-```
-[WARNING] You have 1 available migrations to execute.
-Are you sure you want to execute the migrations? (yes/no) [yes]:
-```
+    > **Note:** You can revert that patch using *majerome-workshop-plugin-sylius-1.13-revert.patch* file instead
 
-4. Load the fixtures:
-```
-bin/console sylius:fixtures:load -n
-```
+3. Get into the php container and flush the cache:
+    ```
+    make php-shell
+    ```
+    Then run:
+    ```
+    bin/console cache:clear
+    ```
+4. Generate the migrations:
+    ```
+    bin/console doctrine:migrations:diff
+    ```
+    >**Note:** Choose namespace ```[0] App\Migrations```.
+
+5. Run the migration
+    ```
+    bin/console doctrine:migrations:execute --up "App\\Migrations\\VersionYYYYMMDDHHMMSSS"
+    ```
+    >**Note:** Replace YYYYMMDDHHMMSSS with the actual timestamp of the migration.
+
+6. Load the fixtures:
+    ```
+    bin/console sylius:fixtures:load -n
+    ```
+
+7. Play with your new Brand resource! 
 
 ---
 
