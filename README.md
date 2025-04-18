@@ -43,7 +43,7 @@ bin/console cache:clear
 ```
 3. Apply the migrations:
 ```
-bin/console sylius:migrations:diff
+bin/console doctrine:migrations:diff
 ```
 - Choose namespace ```
 [0] App\Migrations```  .
