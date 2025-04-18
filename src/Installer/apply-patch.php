@@ -3,7 +3,7 @@
 $pluginDir = dirname(__DIR__, 2); // Chemin vers la racine du plugin
 $projectDir = getcwd(); // Répertoire de travail courant (racine du projet)
 
-$patchFile = $pluginDir . 'src/Installer/majerome-workshop-plugin-sylius-1.13.patch';
+$patchFile = $pluginDir . '/src/Installer/majerome-workshop-plugin-sylius-1.13.patch';
 
 echo "Application du patch Majerome Workshop Plugin...\n";
 
