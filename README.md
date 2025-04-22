@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Sylius](https://img.shields.io/badge/sylius-1.13-brightgreen)
+![Sylius](https://img.shields.io/badge/sylius-1.14-brightgreen)
 ![Packagist Version](https://img.shields.io/packagist/v/majerome/sylius-workshop-plugin)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/majerome/sylius-workshop-plugin)
 ![Maintenance](https://img.shields.io/maintenance/no/2025)
@@ -15,6 +15,8 @@
 [Sylius Practical Mastery Course](https://academy.sylius.com/course/sylius-practical-mastery-course/)
 
 [Chapter 25.2 - How to create a Plugin](https://academy.sylius.com/lesson/25-2-how-to-create-a-plugin/)
+
+[Chapter 26.3 - How to upgrade plugin to 1.14](https://academy.sylius.com/lesson/26-3-how-to-upgrade-plugin-to-1-14/)
 
 ---
 
@@ -31,7 +33,10 @@ It allows you to add a custom “Brand” resource, with those features :
 ---
 
 ## Installation (Docker)
->**Note:** Only tested on a **Sylius v1.13 Docker Project** for now.
+>**Notes:** 
+> - ###### 1st tested on a Sylius v1.13 Docker Project
+> - ###### To be tested on a Sylius v1.14 Docker Project
+
 
 1. Add the plugin to your `composer.json` file:
     ```
