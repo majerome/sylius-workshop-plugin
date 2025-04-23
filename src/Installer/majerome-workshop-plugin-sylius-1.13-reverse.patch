@@ -11,7 +11,7 @@ diff --git a/config/routes.yaml b/config/routes.yaml
 @@ -1,4 +1,2 @@
  sylius_paypal_webhook:
      resource: "@SyliusPayPalPlugin/Resources/config/webhook_routing.yaml"
--majerome_workshop_plugin:
+-majerome.workshop_plugin:
 -    resource: "@MajeromeWorkshopPlugin/config/routing.yaml"
 Index: config/packages/_sylius.yaml
 IDEA additional info:

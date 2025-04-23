@@ -8,8 +8,6 @@
 ![Maintenance](https://img.shields.io/maintenance/no/2025)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
-</div>
-
 ![Sylius](https://sylius.com/wp-content/uploads/2021/03/sylius-logo_sylius-logo-light-1024x422.jpg)
 
 [Sylius Practical Mastery Course](https://academy.sylius.com/course/sylius-practical-mastery-course/)
@@ -17,6 +15,8 @@
 [Chapter 25.2 - How to create a Plugin](https://academy.sylius.com/lesson/25-2-how-to-create-a-plugin/)
 
 [Chapter 26.3 - How to upgrade plugin to 1.14](https://academy.sylius.com/lesson/26-3-how-to-upgrade-plugin-to-1-14/)
+
+</div>
 
 ---
 
@@ -34,21 +34,23 @@ It allows you to add a custom “Brand” resource, with those features :
 
 ## Installation (Docker)
 >**Notes:** 
-> - ###### 1st tested on a Sylius v1.13 Docker Project
-> - ###### To be tested on a Sylius v1.14 Docker Project
+> - 1st tested on a **Sylius v1.13 Docker Project**
+> - To be tested on a **Sylius v1.14 Docker Project**
 
 
-1. Add the plugin to your `composer.json` file:
+1. Get the plugin from Composer
     ```
-    docker compose exec php composer require majerome/sylius-workshop-plugin
+    docker compose exec php composer require majerome/sylius-workshop-plugin --no-scripts
     ```
 
 2. Apply the git patch to set up the plugin:
     ```
-    git apply vendor/majerome/sylius-workshop-plugin/src/Installer/majerome-workshop-plugin-sylius-1.13.patch
+    git apply vendor/majerome/sylius-workshop-plugin/src/Installer/majerome-workshop-plugin-sylius-1.14.patch
     ```
 
-    > **Note:** You can revert that patch using *majerome-workshop-plugin-sylius-1.13-reverse.patch* file instead
+    > **Notes:** 
+      > - You can revert that patch using *majerome-workshop-plugin-sylius-1.14-reverse.patch* file instead
+      > - If you are using a Sylius v1.13 project, you can use the *majerome-workshop-plugin-sylius-1.13.patch* file instead.
 
 3. Get into the php container and flush the cache:
     ```
