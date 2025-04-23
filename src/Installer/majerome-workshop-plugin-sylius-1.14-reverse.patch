@@ -1,4 +1,4 @@
-Subject: [PATCH] Set up majerome/sylius-workshop-plugin for Sylius 1.14
+Subject: [PATCH] Revert setup of majerome/sylius-workshop-plugin for Sylius 1.14
 ---
 Index: config/packages/_sylius.yaml
 IDEA additional info:
@@ -9,14 +9,14 @@ diff --git a/config/packages/_sylius.yaml b/config/packages/_sylius.yaml
 --- a/config/packages/_sylius.yaml	(date 1745398392938)
 +++ b/config/packages/_sylius.yaml	(revision a86e6315bece7fa4446b1b9881a1a61b2452531c)
 @@ -9,15 +9,9 @@
- 
+
      - { resource: "../parameters.yaml" }
- 
+
 -    - { resource: "@MajeromeWorkshopPlugin/config/config.yaml" }
 -
  parameters:
      sylius_core.public_dir: '%kernel.project_dir%/public'
- 
+
 -# Enable state machine abstraction by the Symfony Workflow component
 -sylius_state_machine_abstraction:
 -    default_adapter: symfony_workflow
@@ -61,7 +61,7 @@ diff --git a/src/Entity/Product/Product.php b/src/Entity/Product/Product.php
 -use Majerome\WorkshopPlugin\Entity\Product\ProductTrait;
 +use Sylius\MolliePlugin\Entity\ProductInterface;
 +use Sylius\MolliePlugin\Entity\ProductTrait;
- 
+
  /**
   * @ORM\Entity
 @@ -18,21 +18,6 @@
@@ -84,7 +84,7 @@ diff --git a/src/Entity/Product/Product.php b/src/Entity/Product/Product.php
 -    }
 -
      use ProductTrait;
- 
+
      protected function createTranslation(): ProductTranslationInterface
 Index: src/Repository/ProductRepository.php
 IDEA additional info:

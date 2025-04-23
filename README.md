@@ -8,6 +8,10 @@
 ![Maintenance](https://img.shields.io/maintenance/no/2025)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+</div>
+
+<div align="center">
+
 ![Sylius](https://sylius.com/wp-content/uploads/2021/03/sylius-logo_sylius-logo-light-1024x422.jpg)
 
 [Sylius Practical Mastery Course](https://academy.sylius.com/course/sylius-practical-mastery-course/)
@@ -35,7 +39,8 @@ It allows you to add a custom “Brand” resource, with those features :
 ## Installation (Docker)
 >**Notes:** 
 > - 1st tested on a **Sylius v1.13 Docker Project**
-> - To be tested on a **Sylius v1.14 Docker Project**
+> - Then tested on a **Sylius v1.14 Docker Project**
+> - Make sure you're running a correctly installed version of the Sylius Docker project, and that you've **performed all the necessary migrations beforehand**.
 
 
 1. Get the plugin from Composer
