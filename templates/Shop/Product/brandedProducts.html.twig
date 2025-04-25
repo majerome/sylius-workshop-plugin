@@ -6,6 +6,10 @@
             <div class="col-12">
                 {% import '@SyliusShop/shared/messages.html.twig' as messages %}
                 {% if resources|length > 0 %}
+                    <h1 class="mb-4">{{ products|first.brand.name }}</h1>
+                    <div class="mb-4">
+                        {{ products|first.brand.description }}
+                    </div>
                     <div class="products-grid" }}>
                         {% for product in resources %}
                             {{ component('sylius_shop:product:card', { product: product, template: '@SyliusShop/product/common/card.html.twig' }) }}
