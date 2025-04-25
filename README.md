@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Sylius](https://img.shields.io/badge/sylius-1.14-brightgreen)
+![Sylius](https://img.shields.io/badge/sylius-2.0-brightgreen)
 ![Packagist Version](https://img.shields.io/packagist/v/majerome/sylius-workshop-plugin)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/majerome/sylius-workshop-plugin)
 ![Maintenance](https://img.shields.io/maintenance/no/2025)
@@ -48,6 +48,7 @@ It allows you to add a custom “Brand” resource, with those features :
 >**Notes:** 
 > - 1st tested on a **Sylius v1.13 Docker Project**
 > - Then tested on a **Sylius v1.14 Docker Project**
+> - To be tested on a **Sylius v2.0 Docker Project**
 > - Make sure you're running a correctly installed version of the Sylius Docker project, and that you've **performed all the necessary migrations beforehand**.
 
 
@@ -100,6 +101,20 @@ It allows you to add a custom “Brand” resource, with those features :
 
 ---
 
+## Releases
+
+- **v1.0.7** - Valid version for Sylius v1.13
+- **v1.1.3** - Valid version for Sylius v1.14
+- **v1.2.0** - Version for Sylius v2.0 - **Not yet released!**
+
+---
+
 ## Screenshots
 
+- Sylius v1
+
 ![Demo](https://raw.githubusercontent.com/majerome/sylius-workshop-plugin/master/docs/demo.png)
+
+- Sylius v2
+
+![Demo](https://raw.githubusercontent.com/majerome/sylius-workshop-plugin/master/docs/demo-2.png)
