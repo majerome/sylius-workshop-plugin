@@ -45,12 +45,13 @@ It allows you to add a custom “Brand” resource, with those features :
 ---
 
 ## Installation (Docker)
->**Notes:** 
+
+> **Notes:**
 > - 1st tested on a **Sylius v1.13 Docker Project**
 > - Then tested on a **Sylius v1.14 Docker Project**
-> - To be tested on a **Sylius v2.0 Docker Project**
-> - Make sure you're running a correctly installed version of the Sylius Docker project, and that you've **performed all the necessary migrations beforehand**.
-
+> - Finally tested on a **Sylius v2.0 Docker Project**
+> - Make sure you're running a correctly installed version of the Sylius Docker project, and that you've **performed all
+    the necessary migrations beforehand**.
 
 1. Get the plugin from Composer
     ```
@@ -59,12 +60,17 @@ It allows you to add a custom “Brand” resource, with those features :
 
 2. Apply the git patch to set up the plugin:
     ```
-    git apply vendor/majerome/sylius-workshop-plugin/src/Installer/majerome-workshop-plugin-sylius-1.14.patch
+    git apply vendor/majerome/sylius-workshop-plugin/src/Installer/majerome-workshop-plugin-sylius-2.0.patch
     ```
 
-    > **Notes:** 
-      > - You can revert that patch using *majerome-workshop-plugin-sylius-1.14-reverse.patch* file instead
-      > - If you are using a Sylius v1.13 project, you can use the *majerome-workshop-plugin-sylius-1.13.patch* file instead.
+   > **Notes:**
+   > - You can revert that patch using *majerome-workshop-plugin-sylius-2.0-reverse.patch* file instead
+   > - If you are using a Sylius v1.13 project, replace the patch file with
+       *majerome-workshop-plugin-sylius-1.13.patch*.
+       <br>(reverse patch is *majerome-workshop-plugin-sylius-1.13-reverse.patch*)
+   > - If you are using a Sylius v1.14 project, replace the patch file with
+       *majerome-workshop-plugin-sylius-1.14.patch*.
+       <br>(reverse patch is *majerome-workshop-plugin-sylius-1.14-reverse.patch*)
 
 3. Get into the php container and flush the cache:
     ```
@@ -103,9 +109,9 @@ It allows you to add a custom “Brand” resource, with those features :
 
 ## Releases
 
-- **v1.0.7** - Valid version for Sylius v1.13
+- **v1.0.9** - Valid version for Sylius v1.13
 - **v1.1.3** - Valid version for Sylius v1.14
-- **v1.2.0** - Version for Sylius v2.0 - **Not yet released!**
+- **v1.2.2** - Valid version for Sylius v2.0
 
 ---
 

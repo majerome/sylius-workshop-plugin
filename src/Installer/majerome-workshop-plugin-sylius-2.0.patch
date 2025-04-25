@@ -1,0 +1,103 @@
+Subject: [PATCH] Set up majerome/sylius-workshop-plugin for Sylius 2.0
+---
+Index: src/Entity/Product/Product.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entity/Product/Product.php b/src/Entity/Product/Product.php
+--- a/src/Entity/Product/Product.php	(revision 321ea59ea90abd4a25b652c7eb85e321d5ab1b41)
++++ b/src/Entity/Product/Product.php	(date 1745577399861)
+@@ -7,11 +7,30 @@
+ use Doctrine\ORM\Mapping as ORM;
+ use Sylius\Component\Core\Model\Product as BaseProduct;
+ use Sylius\Component\Product\Model\ProductTranslationInterface;
++use Majerome\WorkshopPlugin\Entity\Product\ProductInterface;
++use Majerome\WorkshopPlugin\Entity\Product\ProductTrait;
+ 
+ #[ORM\Entity]
+ #[ORM\Table(name: 'sylius_product')]
+-class Product extends BaseProduct
++class Product extends BaseProduct implements ProductInterface
+ {
++    /**
++     * @ORM\Column(type="string", nullable=true)
++     */
++    private ?string $productType = null;
++
++    public function getProductType(): ?string
++    {
++        return $this->productType;
++    }
++
++    public function setProductType(?string $productType): void
++    {
++        $this->productType = $productType;
++    }
++
++    use ProductTrait;
++
+     protected function createTranslation(): ProductTranslationInterface
+     {
+         return new ProductTranslation();
+Index: config/routes/majerome_workshop.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/routes/majerome_workshop.yaml b/config/routes/majerome_workshop.yaml
+new file mode 100644
+--- /dev/null	(date 1745577202540)
++++ b/config/routes/majerome_workshop.yaml	(date 1745577202540)
+@@ -0,0 +1,2 @@
++majerome.workshop_plugin:
++    resource: "@MajeromeWorkshopPlugin/config/routing.yaml"
+Index: config/packages/_sylius.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/packages/_sylius.yaml b/config/packages/_sylius.yaml
+--- a/config/packages/_sylius.yaml	(revision 321ea59ea90abd4a25b652c7eb85e321d5ab1b41)
++++ b/config/packages/_sylius.yaml	(date 1745577001931)
+@@ -7,6 +7,8 @@
+ 
+     - { resource: "../parameters.yaml" }
+ 
++    - { resource: "@MajeromeWorkshopPlugin/config/config.yaml" }
++
+ parameters:
+     sylius_core.public_dir: '%kernel.project_dir%/public'
+ 
+@@ -145,6 +147,7 @@
+         product:
+             classes:
+                 model: App\Entity\Product\Product
++                repository: App\Repository\ProductRepository
+             translation:
+                 classes:
+                     model: App\Entity\Product\ProductTranslation
+Index: src/Repository/ProductRepository.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Repository/ProductRepository.php b/src/Repository/ProductRepository.php
+new file mode 100644
+--- /dev/null	(date 1745577446645)
++++ b/src/Repository/ProductRepository.php	(date 1745577446645)
+@@ -0,0 +1,14 @@
++<?php
++
++declare(strict_types=1);
++
++namespace App\Repository;
++
++use Majerome\WorkshopPlugin\Repository\ProductRepositoryInterface;
++use Majerome\WorkshopPlugin\Repository\ProductRepositoryTrait;
++use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
++
++final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
++{
++    use ProductRepositoryTrait;
++}
