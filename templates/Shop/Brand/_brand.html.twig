@@ -1,9 +1,13 @@
-<div class="ui dropdown item">
-    <span class="text">{{ 'majerome_workshop_plugin.ui.branded_products'|trans }}</span>
-    <i class="dropdown icon"></i>
-    <div class="menu">
+<div class="nav-item dropdown">
+    <a class="nav-link d-flex align-items-center gap-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ 'majerome_workshop_plugin.ui.branded_products'|trans }}
+        {{ ux_icon('tabler:chevron-down', { 'class': 'icon icon-sm'}) }}
+    </a>
+    <div class="dropdown-menu">
         {% for brand in brands %}
-            <a href="{{ path('majerome.workshop_plugin.shop_branded_products_index', {'code': brand.code}) }}" class="item">{{ brand.name }}</a>
+            <a class="nav-link" href="{{ path('majerome.workshop_plugin.shop_branded_products_index', {'code': brand.code}) }}">
+                {{ brand.name }}
+            </a>
         {% endfor %}
     </div>
 </div>

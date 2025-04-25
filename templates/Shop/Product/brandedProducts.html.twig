@@ -1,19 +1,20 @@
-{% extends '@SyliusShop/layout.html.twig' %}
-{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
 {% block content %}
-    {% if products|length > 0 %}
-        <div class="ui segment">
-            {{ products|first.brand.description }}
-        </div>
-        <div class="ui segment">
-            <div class="ui three cards">
-                {% for product in products %}
-                    {% include '@SyliusShop/Product/_box.html.twig' %}
-                {% endfor %}
+    <div class="container mt-4 mb-5">
+        <div class="row mt-5">
+            <div class="col-12">
+                {% import '@SyliusShop/shared/messages.html.twig' as messages %}
+                {% if resources|length > 0 %}
+                    <div class="products-grid" }}>
+                        {% for product in resources %}
+                            {{ component('sylius_shop:product:card', { product: product, template: '@SyliusShop/product/common/card.html.twig' }) }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ messages.info('sylius.ui.no_results_to_display') }}
+                {% endif %}
             </div>
         </div>
-    {% else %}
-        {{ messages.info('sylius.ui.no_results_to_display') }}
-    {% endif %}
+    </div>
 {% endblock %}

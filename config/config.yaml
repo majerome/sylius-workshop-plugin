@@ -2,3 +2,22 @@ imports:
   - { resource: "@MajeromeWorkshopPlugin/config/grids/*.yaml" }
   - { resource: "@MajeromeWorkshopPlugin/config/workflow/*.yaml" }
   - { resource: "@MajeromeWorkshopPlugin/config/fixtures/*.yaml" }
+
+sylius_twig_hooks:
+  hooks:
+    'sylius_admin.product.update.content.form.side_navigation':
+      brand:
+        template: '@MajeromeWorkshopPlugin/Admin/Product/Tab/_brand.html.twig'
+        priority: -100
+    'sylius_admin.product.update.content.form.sections':
+      brand:
+        template: '@MajeromeWorkshopPlugin/Admin/Product/Tab/brand.html.twig'
+        priority: -100
+    'sylius_admin.brand.update.content.form':
+      sections:
+        template: '@MajeromeWorkshopPlugin/Admin/Brand/_form.html.twig'
+        priority: 0
+    'sylius_shop.base.header.navbar.menu':
+      branded_products:
+        template: '@MajeromeWorkshopPlugin/Shop/Brand/brandMenu.html.twig'
+        priority: 10

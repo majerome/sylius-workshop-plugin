@@ -1,7 +1,9 @@
-<div class="ui tab" data-tab="brands">
-    <h3 class="ui top attached header">{{ 'majerome_workshop_plugin.ui.brands'|trans }}</h3>
-
-    <div class="ui attached segment">
-        {{ form_row(form.brand) }}
-    </div>
-</div>
+<button
+        type="button"
+        class="list-group-item list-group-item-action {% if hookable_metadata.configuration.active|default(false) %}active{% endif %}"
+        data-bs-toggle="tab"
+        data-bs-target="#brand"
+        role="tab"
+>
+    {{ 'majerome_workshop_plugin.ui.brands'|trans }}
+</button>

@@ -2,7 +2,7 @@ majerome.workshop_plugin.admin_brand:
   resource: |
     alias: majerome_workshop.brand
     section: admin
-    templates: "@SyliusAdmin\\Crud"
+    templates: "@SyliusAdmin\\shared\\crud"
     redirect: update
     except: ['show']
     grid: majerome.workshop_plugin.admin_brand

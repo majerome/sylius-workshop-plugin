@@ -1,5 +1,6 @@
 majerome_workshop_plugin:
   ui:
+    brand: Brand
     brands: Brands
     edit_brand: Edit brand
     new_brand: New brand
@@ -46,6 +47,7 @@ majerome_workshop_plugin:
     brand_filter: Brand filter
 majerome_workshop:
   ui:
+    brand: Brand
     brands: Brands
     edit_brand: Edit brand
     new_brand: New brand

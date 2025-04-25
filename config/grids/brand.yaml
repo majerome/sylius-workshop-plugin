@@ -24,7 +24,7 @@ sylius_grid:
         enabled:
           type: twig
           options:
-            template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
           sortable: ~
           label: majerome_workshop_plugin.grid.enabled
         createdAt:
@@ -58,7 +58,7 @@ sylius_grid:
           reject:
             type: apply_transition
             label: majerome_workshop_plugin.ui.reject
-            icon: close icon
+            icon: "tabler:x"
             options:
               link:
                 route: majerome.workshop_plugin.admin_brand_reject
@@ -70,7 +70,7 @@ sylius_grid:
           approve:
             type: apply_transition
             label: majerome_workshop_plugin.ui.approve
-            icon: check
+            icon: "tabler:check"
             options:
               link:
                 route: majerome.workshop_plugin.admin_brand_approve
@@ -82,7 +82,7 @@ sylius_grid:
           suspend:
             type: apply_transition
             label: majerome_workshop_plugin.ui.suspend
-            icon: close icon
+            icon: "tabler:hourglass-empty"
             options:
               link:
                 route: majerome.workshop_plugin.admin_brand_suspend
