@@ -1,9 +1,9 @@
 <div class="ui dropdown item">
-    <span class="text">{{ 'sylius.ui.branded_products'|trans }}</span>
+    <span class="text">{{ 'majerome_workshop_plugin.ui.branded_products'|trans }}</span>
     <i class="dropdown icon"></i>
     <div class="menu">
         {% for brand in brands %}
-            <a href="{{ path('majerome.workshop_plugin.shop_partial_branded_products_index', {'code': brand.code}) }}" class="item">{{ brand.name }}</a>
+            <a href="{{ path('majerome.workshop_plugin.shop_branded_products_index', {'code': brand.code}) }}" class="item">{{ brand.name }}</a>
         {% endfor %}
     </div>
 </div>

@@ -31,7 +31,7 @@ It allows you to add a custom “Brand” resource, with those features :
 ---
 
 ## Installation (Docker)
->**Note:** Only tested on a **Sylius v1.13 Docker Project**
+>**Note:** Only tested on a **Sylius v1.13 Docker Project** for now.
 
 1. Add the plugin to your `composer.json` file:
     ```
@@ -43,7 +43,7 @@ It allows you to add a custom “Brand” resource, with those features :
     git apply vendor/majerome/sylius-workshop-plugin/src/Installer/majerome-workshop-plugin-sylius-1.13.patch
     ```
 
-    > **Note:** You can revert that patch using *majerome-workshop-plugin-sylius-1.13-revert.patch* file instead
+    > **Note:** You can revert that patch using *majerome-workshop-plugin-sylius-1.13-reverse.patch* file instead
 
 3. Get into the php container and flush the cache:
     ```
@@ -61,20 +61,18 @@ It allows you to add a custom “Brand” resource, with those features :
 
 5. Run the migration
     ```
-    bin/console doctrine:migrations:execute --up "App\\Migrations\\VersionYYYYMMDDHHMMSSS"
+    bin/console doctrine:migrations:migrate
     ```
-    >**Note:** Replace YYYYMMDDHHMMSSS with the actual timestamp of the migration.
 
 6. Load the fixtures:
     ```
     bin/console sylius:fixtures:load -n
     ```
 
-7. Play with your new Brand resource! 
+7. Play with your brand new "Brand" resource! 
 
 ---
 
 ## Screenshots
 
 ![Demo](https://raw.githubusercontent.com/majerome/sylius-workshop-plugin/master/docs/demo.png)
-

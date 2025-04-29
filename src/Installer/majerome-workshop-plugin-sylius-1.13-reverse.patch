@@ -1,0 +1,137 @@
+Subject: [PATCH] Revert setup of majerome/sylius-workshop-plugin for Sylius 1.13
+---
+Index: config/routes.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/routes.yaml b/config/routes.yaml
+--- a/config/routes.yaml	(date 1745853119214)
++++ b/config/routes.yaml	(revision 4bcc66e2af2afa3963c9b76f9ecffa4061f86060)
+@@ -1,4 +1,2 @@
+ sylius_paypal_webhook:
+     resource: "@SyliusPayPalPlugin/Resources/config/webhook_routing.yaml"
+-majerome_workshop_plugin:
+-    resource: "@MajeromeWorkshopPlugin/config/routing.yaml"
+Index: config/packages/_sylius.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/packages/_sylius.yaml b/config/packages/_sylius.yaml
+--- a/config/packages/_sylius.yaml	(date 1745853119214)
++++ b/config/packages/_sylius.yaml	(revision 4bcc66e2af2afa3963c9b76f9ecffa4061f86060)
+@@ -9,15 +9,9 @@
+     - { resource: "@SyliusPayPalPlugin/Resources/config/config.yaml" }
+     - { resource: "../parameters.yaml" }
+ 
+-    - { resource: "@MajeromeWorkshopPlugin/config/config.yaml" }
+-
+ parameters:
+     sylius_core.public_dir: '%kernel.project_dir%/public'
+ 
+-# Enable state machine abstraction by the Symfony Workflow component
+-sylius_state_machine_abstraction:
+-    default_adapter: symfony_workflow
+-
+ when@dev:
+     sylius_api:
+         enabled: true
+@@ -147,7 +141,6 @@
+         product:
+             classes:
+                 model: App\Entity\Product\Product
+-                repository: App\Repository\ProductRepository
+             translation:
+                 classes:
+                     model: App\Entity\Product\ProductTranslation
+Index: src/Entity/Product/Product.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Entity/Product/Product.php b/src/Entity/Product/Product.php
+--- a/src/Entity/Product/Product.php	(date 1745853119214)
++++ b/src/Entity/Product/Product.php	(revision 4bcc66e2af2afa3963c9b76f9ecffa4061f86060)
+@@ -5,8 +5,6 @@
+ namespace App\Entity\Product;
+ 
+ use Doctrine\ORM\Mapping as ORM;
+-use Majerome\WorkshopPlugin\Entity\Product\ProductInterface;
+-use Majerome\WorkshopPlugin\Entity\Product\ProductTrait;
+ use Sylius\Component\Core\Model\Product as BaseProduct;
+ use Sylius\Component\Product\Model\ProductTranslationInterface;
+ 
+@@ -16,9 +14,8 @@
+  */
+ #[ORM\Entity]
+ #[ORM\Table(name: 'sylius_product')]
+-class Product extends BaseProduct implements ProductInterface
++class Product extends BaseProduct
+ {
+-    use ProductTrait;
+     protected function createTranslation(): ProductTranslationInterface
+     {
+         return new ProductTranslation();
+Index: templates/bundles/SyliusShopBundle/Taxon/_horizontalMenu.html.twig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/bundles/SyliusShopBundle/Taxon/_horizontalMenu.html.twig b/templates/bundles/SyliusShopBundle/Taxon/_horizontalMenu.html.twig
+deleted file mode 100644
+--- a/templates/bundles/SyliusShopBundle/Taxon/_horizontalMenu.html.twig	(date 1745849213914)
++++ /dev/null	(date 1745849213914)
+@@ -1,28 +0,0 @@
+-{% macro item(taxon) %}
+-    {% import _self as macros %}
+-
+-    {% if taxon.enabledChildren|length > 0 %}
+-        <div class="ui dropdown item" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
+-            <span class="text">{{ taxon.name }}</span>
+-            <i class="dropdown icon"></i>
+-            <div class="menu">
+-                {% for childTaxon in taxon.enabledChildren %}
+-                    {{ macros.item(childTaxon) }}
+-                {% endfor %}
+-            </div>
+-        </div>
+-    {% else %}
+-        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}" class="item" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>{{ taxon.name }}</a>
+-    {% endif %}
+-{% endmacro %}
+-
+-{% import _self as macros %}
+-
+-{% if taxons|length > 0 %}
+-    <div class="ui large stackable menu" {{ sylius_test_html_attribute('menu') }}>
+-        {{ render(path('majerome.workshop_plugin.shop_partial_branded_products_index')) }}
+-        {% for taxon in taxons %}
+-            {{ macros.item(taxon) }}
+-        {% endfor %}
+-    </div>
+-{% endif %}
+Index: src/Repository/ProductRepository.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Repository/ProductRepository.php b/src/Repository/ProductRepository.php
+deleted file mode 100644
+--- a/src/Repository/ProductRepository.php	(date 1745853119214)
++++ /dev/null	(date 1745853119214)
+@@ -1,14 +0,0 @@
+-<?php
+-
+-declare(strict_types=1);
+-
+-namespace App\Repository;
+-
+-use Majerome\WorkshopPlugin\Repository\ProductRepositoryInterface;
+-use Majerome\WorkshopPlugin\Repository\ProductRepositoryTrait;
+-use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
+-
+-final class ProductRepository extends BaseProductRepository implements ProductRepositoryInterface
+-{
+-    use ProductRepositoryTrait;
+-}
