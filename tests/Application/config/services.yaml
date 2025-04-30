@@ -2,3 +2,15 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en_US
+
+services:
+    app.api.brand_enabled_filter:
+        parent: api_platform.doctrine.orm.boolean_filter
+        public: true
+        tags:
+            - { name: api_platform.filter }
+
+    Tests\Majerome\WorkshopPlugin\Api\Applicator\BrandsStateApplicator:
+        public: true
+        arguments:
+          [ '@workflow.registry' ]

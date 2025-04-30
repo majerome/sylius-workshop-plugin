@@ -53,23 +53,18 @@ It allows you to add a custom “Brand” resource, with those features :
     ```
     bin/console cache:clear
     ```
-4. Generate the migrations:
-    ```
-    bin/console doctrine:migrations:diff
-    ```
-    >**Note:** Choose namespace ```[0] App\Migrations```.
-
-5. Run the migration
+4. Run the migration
     ```
     bin/console doctrine:migrations:migrate
     ```
+    > **Note:** It will execute the migration Version20250417083939 from the plugin.
 
-6. Load the fixtures:
+5. Load the fixtures:
     ```
     bin/console sylius:fixtures:load -n
     ```
 
-7. Play with your brand new "Brand" resource! 
+6. Play with your brand new "Brand" resource! 
 
 ---
 

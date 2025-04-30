@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<resources xmlns="https://api-platform.com/schema/metadata"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata https://api-platform.com/schema/metadata/metadata-2.0.xsd"
+>
+    <resource class="Tests\Majerome\WorkshopPlugin\Entity\Product\Product" shortName="Product">
+        <attribute name="validation_groups">sylius</attribute>
+
+        <attribute name="order">
+            <attribute name="code">ASC</attribute>
+        </attribute>
+
+        <collectionOperations>
+            <collectionOperation name="shop_get">
+                <attribute name="path">/shop/products/custom</attribute>
+                <attribute name="normalization_context">
+                    <attribute name="groups">
+                        <attribute>custom</attribute>
+                    </attribute>
+                </attribute>
+            </collectionOperation>
+        </collectionOperations>
+
+        <property name="code" identifier="true" required="true" />
+    </resource>
+</resources>
