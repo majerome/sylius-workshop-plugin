@@ -19,3 +19,4 @@
 
 /.idea/
 supervisord.log
+compose.override.yml
