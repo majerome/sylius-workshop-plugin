@@ -14,7 +14,7 @@ diff --git a/src/Entity/Product/Product.php b/src/Entity/Product/Product.php
  use Sylius\Component\Product\Model\ProductTranslationInterface;
 +use Majerome\WorkshopPlugin\Entity\Product\ProductInterface;
 +use Majerome\WorkshopPlugin\Entity\Product\ProductTrait;
- 
+
  #[ORM\Entity]
  #[ORM\Table(name: 'sylius_product')]
 -class Product extends BaseProduct
@@ -61,14 +61,14 @@ diff --git a/config/packages/_sylius.yaml b/config/packages/_sylius.yaml
 --- a/config/packages/_sylius.yaml	(revision 321ea59ea90abd4a25b652c7eb85e321d5ab1b41)
 +++ b/config/packages/_sylius.yaml	(date 1745577001931)
 @@ -7,6 +7,8 @@
- 
+
      - { resource: "../parameters.yaml" }
- 
+
 +    - { resource: "@MajeromeWorkshopPlugin/config/config.yaml" }
 +
  parameters:
      sylius_core.public_dir: '%kernel.project_dir%/public'
- 
+
 @@ -145,6 +147,7 @@
          product:
              classes:
@@ -101,3 +101,278 @@ new file mode 100644
 +{
 +    use ProductRepositoryTrait;
 +}
+Index: config/api_platform/properties/Brand.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/api_platform/properties/Brand.xml b/config/api_platform/properties/Brand.xml
+new file mode 100644
+--- /dev/null	(date 1746448787654)
++++ b/config/api_platform/properties/Brand.xml	(date 1746448787654)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<properties xmlns="https://api-platform.com/schema/metadata/properties-3.0"
++            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++            xsi:schemaLocation="https://api-platform.com/schema/metadata/properties-3.0 https://api-platform.com/schema/metadata/properties-3.0.xsd"
++>
++    <property resource="Majerome\WorkshopPlugin\Entity\Brand\Brand" name="id" identifier="true" writable="false"/>
++</properties>
+Index: config/services.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/services.yaml b/config/services.yaml
+--- a/config/services.yaml	(revision c47e35a0f3488bea6dc422af8d2b6dbfbdcf6950)
++++ b/config/services.yaml	(date 1746451682292)
+@@ -28,3 +28,12 @@
+     App\Controller\:
+         resource: '../src/Controller'
+         tags: ['controller.service_arguments']
++
++    app.api.brand_enabled_filter:
++        parent: api_platform.doctrine.orm.boolean_filter
++        public: true
++        tags:
++            - { name: api_platform.filter }
++
++    Majerome\WorkshopPlugin\Api\Applicator\BrandsStateApplicator:
++        public: true
+Index: config/api_platform/resources/admin/Brand.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/api_platform/resources/admin/Brand.xml b/config/api_platform/resources/admin/Brand.xml
+new file mode 100644
+--- /dev/null	(date 1746448787658)
++++ b/config/api_platform/resources/admin/Brand.xml	(date 1746448787658)
+@@ -0,0 +1,79 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<resources
++        xmlns="https://api-platform.com/schema/metadata/resources-3.0"
++        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++        xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
++>
++    <resource class="Majerome\WorkshopPlugin\Entity\Brand\Brand">
++        <operations>
++            <operation name="admin_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/admin/brands">
++                <normalizationContext>
++                    <values>
++                        <value name="groups">
++                            <values>
++                                <value>admin:brands:read</value>
++                            </values>
++                        </value>
++                    </values>
++                </normalizationContext>
++            </operation>
++
++            <operation name="admin_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/brands/{id}">
++                <normalizationContext>
++                    <values>
++                        <value name="groups">
++                            <values>
++                                <value>admin:brand:read</value>
++                            </values>
++                        </value>
++                    </values>
++                </normalizationContext>
++            </operation>
++
++            <operation name="admin_create" class="ApiPlatform\Metadata\Post" uriTemplate="/admin/brands">
++                <normalizationContext>
++                    <values>
++                        <value name="groups">
++                            <values>
++                                <value>admin:brand:read</value>
++                            </values>
++                        </value>
++                    </values>
++                </normalizationContext>
++                <validationContext>
++                    <values>
++                        <value name="groups">
++                            <values>
++                                <value>sylius</value>
++                            </values>
++                        </value>
++                    </values>
++                </validationContext>
++            </operation>
++
++            <operation name="admin_update" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/brands/{id}">
++                <normalizationContext>
++                    <values>
++                        <value name="groups">
++                            <values>
++                                <value>admin:brand:read</value>
++                            </values>
++                        </value>
++                    </values>
++                </normalizationContext>
++            </operation>
++
++            <operation name="admin_delete" class="ApiPlatform\Metadata\Delete" uriTemplate="/admin/brands/{id}" />
++
++            <operation
++                    name="admin_approve"
++                    class="ApiPlatform\Metadata\Patch"
++                    uriTemplate="/admin/brands/{id}/approve"
++                    input="false"
++                    controller="Majerome\WorkshopPlugin\Api\Applicator\BrandsStateApplicator::approve"
++            >
++            </operation>
++        </operations>
++    </resource>
++</resources>
+Index: config/api_platform/resources/shop/Brand.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/api_platform/resources/shop/Brand.xml b/config/api_platform/resources/shop/Brand.xml
+new file mode 100644
+--- /dev/null	(date 1746448787642)
++++ b/config/api_platform/resources/shop/Brand.xml	(date 1746448787642)
+@@ -0,0 +1,38 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<resources
++        xmlns="https://api-platform.com/schema/metadata/resources-3.0"
++        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++        xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
++>
++    <resource class="Majerome\WorkshopPlugin\Entity\Brand\Brand">
++        <operations>
++            <operation name="shop_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/brands">
++                <normalizationContext>
++                    <values>
++                        <value name="groups">
++                            <values>
++                                <value>shop:brands:read</value>
++                            </values>
++                        </value>
++                    </values>
++                </normalizationContext>
++                <filters>
++                    <filter>app.api.brand_enabled_filter</filter>
++                </filters>
++            </operation>
++
++            <operation name="shop_get" class="ApiPlatform\Metadata\Get" uriTemplate="/shop/brands/{id}">
++                <normalizationContext>
++                    <values>
++                        <value name="groups">
++                            <values>
++                                <value>shop:brand:read</value>
++                            </values>
++                        </value>
++                    </values>
++                </normalizationContext>
++            </operation>
++        </operations>
++    </resource>
++</resources>
+Index: config/serialization/Product.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/serialization/Product.xml b/config/serialization/Product.xml
+new file mode 100644
+--- /dev/null	(date 1746451308248)
++++ b/config/serialization/Product.xml	(date 1746451308248)
+@@ -0,0 +1,14 @@
++<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
++            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
++>
++    <class name="App\Entity\Product\Product">
++        <attribute name="brand" serialized-name="manufacturer">
++            <group>shop:product:index</group>
++            <group>custom</group>
++        </attribute>
++        <attribute name="code">
++            <group>custom</group>
++        </attribute>
++    </class>
++</serializer>
+Index: config/serialization/Brand.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/config/serialization/Brand.xml b/config/serialization/Brand.xml
+new file mode 100644
+--- /dev/null	(date 1746436528328)
++++ b/config/serialization/Brand.xml	(date 1746436528328)
+@@ -0,0 +1,65 @@
++<?xml version="1.0" ?>
++<serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
++            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
++>
++    <class name="Majerome\WorkshopPlugin\Entity\Brand\Brand">
++        <attribute name="id">
++            <group>admin:brands:read</group>
++            <group>shop:brands:read</group>
++            <group>admin:brand:read</group>
++            <group>shop:brand:read</group>
++        </attribute>
++        <attribute name="name">
++            <group>admin:brands:read</group>
++            <group>shop:brands:read</group>
++            <group>admin:brand:read</group>
++            <group>shop:brand:read</group>
++            <group>shop:product:index</group>
++            <group>custom</group>
++        </attribute>
++        <attribute name="type">
++            <group>admin:brands:read</group>
++            <group>shop:brands:read</group>
++            <group>admin:brand:read</group>
++            <group>shop:brand:read</group>
++        </attribute>
++        <attribute name="description">
++            <group>admin:brand:read</group>
++            <group>shop:brand:read</group>
++        </attribute>
++        <attribute name="code">
++            <group>admin:brands:read</group>
++            <group>admin:brand:read</group>
++        </attribute>
++        <attribute name="enabled">
++            <group>admin:brands:read</group>
++            <group>admin:brand:read</group>
++        </attribute>
++        <attribute name="state">
++            <group>admin:brands:read</group>
++            <group>admin:brand:read</group>
++        </attribute>
++        <attribute name="createdAt">
++            <group>admin:brands:read</group>
++            <group>shop:brands:read</group>
++            <group>admin:brand:read</group>
++            <group>shop:brand:read</group>
++        </attribute>
++        <attribute name="updatedAt">
++            <group>admin:brands:read</group>
++            <group>shop:brands:read</group>
++            <group>admin:brand:read</group>
++            <group>shop:brand:read</group>
++        </attribute>
++        <attribute name="products">
++            <group>admin:brand:read</group>
++            <group>shop:brand:read</group>
++        </attribute>
++        <attribute name="channels">
++            <group>admin:brands:read</group>
++            <group>admin:brand:read</group>
++        </attribute>
++    </class>
++
++</serializer>

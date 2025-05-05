@@ -28,6 +28,8 @@
 
 [Chapter 26.3 - How to upgrade plugin to 1.14](https://academy.sylius.com/lesson/26-3-how-to-upgrade-plugin-to-1-14/)
 
+[Chapter 27.3 - How to upgrade plugin to 2.0](https://academy.sylius.com/lesson/27-3-how-to-upgrade-plugin-to-2-0/)
+
 </div>
 
 ---
@@ -102,8 +104,13 @@ It allows you to add a custom “Brand” resource, with those features :
     ```
     bin/console sylius:fixtures:load -n
     ```
+   
+7. Clear the cache again, to handle translations:
+    ```
+    bin/console cache:clear
+    ```
 
-7. Play with your brand new "Brand" resource! 
+8. Play with your brand new "Brand" resource! 
 
 ---
 
