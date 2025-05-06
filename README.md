@@ -10,8 +10,6 @@
 
 </div>
 
-<div align="center">
-
 <p align="center">
     <a href="https://sylius.com" target="_blank">
         <picture>
@@ -21,6 +19,7 @@
         </picture>
     </a>
 </p>
+<div align="center">
 
 [Sylius Practical Mastery Course](https://academy.sylius.com/course/sylius-practical-mastery-course/)
 
@@ -52,7 +51,8 @@ It allows you to add a custom “Brand” resource, with those features :
 > - 1st tested on a **Sylius v1.13 Docker Project**
 > - Then tested on a **Sylius v1.14 Docker Project**
 > - Finally tested on a **Sylius v2.0 Docker Project**
-> - Make sure you're running a correctly installed version of the Sylius Docker project, and that you've **performed all
+>
+> Make sure you're running a correctly installed version of the Sylius Docker project, and that you've **performed all
     the necessary migrations beforehand**.
 
 1. Get the plugin from Composer
@@ -117,8 +117,8 @@ It allows you to add a custom “Brand” resource, with those features :
 ## Releases
 
 - **v1.0.9** - Valid version for Sylius v1.13
-- **v1.1.3** - Valid version for Sylius v1.14
-- **v1.2.2** - Valid version for Sylius v2.0
+- **v1.1.4** - Valid version for Sylius v1.14
+- **v1.2.4** - Valid version for Sylius v2.0
 
 ---
 
