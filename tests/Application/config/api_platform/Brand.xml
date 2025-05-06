@@ -60,7 +60,7 @@
                 <attribute name="method">PATCH</attribute>
                 <attribute name="input">false</attribute>
                 <attribute name="path">/admin/brands/{id}/approve</attribute>
-                <attribute name="controller">Test\Majerome\WorkshopPlugin\Api\Applicator\BrandsStateApplicator::approve</attribute>
+                <attribute name="controller">Majerome\WorkshopPlugin\Api\Applicator\BrandsStateApplicator::approve</attribute>
             </itemOperation>
         </itemOperations>
 

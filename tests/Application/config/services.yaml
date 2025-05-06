@@ -10,7 +10,7 @@ services:
         tags:
             - { name: api_platform.filter }
 
-    Tests\Majerome\WorkshopPlugin\Api\Applicator\BrandsStateApplicator:
+    Majerome\WorkshopPlugin\Api\Applicator\BrandsStateApplicator:
         public: true
         arguments:
           [ '@workflow.registry' ]

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Majerome\WorkshopPlugin\Api\Applicator;
+namespace Majerome\WorkshopPlugin\Api\Applicator;
 
 use Majerome\WorkshopPlugin\Entity\Brand\Brand;
 use Majerome\WorkshopPlugin\StateMachine\BrandTransitions;
@@ -23,7 +23,7 @@ final class BrandsStateApplicator
         if (!$sm->can($brand, BrandTransitions::TRANSITION_APPROVE)) {
             throw new StateMachineTransitionFailedException('Cannot approve the Brand.');
         }
-        if ($brand->getDescription() === null) {
+        if (!$brand->getDescription()) {
             $brand->setDescription('');
         }
         $sm->apply($brand, BrandTransitions::TRANSITION_APPROVE);

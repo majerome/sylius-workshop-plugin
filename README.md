@@ -12,7 +12,15 @@
 
 <div align="center">
 
-![Sylius](https://sylius.com/wp-content/uploads/2021/03/sylius-logo_sylius-logo-light-1024x422.jpg)
+<p align="center">
+    <a href="https://sylius.com" target="_blank">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://media.sylius.com/sylius-logo-800-dark.png">
+          <source media="(prefers-color-scheme: light)" srcset="https://media.sylius.com/sylius-logo-800.png">
+          <img alt="Sylius Logo." src="https://media.sylius.com/sylius-logo-800.png">
+        </picture>
+    </a>
+</p>
 
 [Sylius Practical Mastery Course](https://academy.sylius.com/course/sylius-practical-mastery-course/)
 
@@ -29,8 +37,8 @@ This plugin is the product of Sylius training.
 It allows you to add a custom “Brand” resource, with those features :
 
 - Back Office Grid: creation, edition, deletion,
-- Assignment to a category "automotive" or "electronics.",
-- Workflow for brand validation by State Machine, 
+- Assignment to a category "automotive" or "electronics",
+- Workflow for brand validation by API / State Machine, 
 - Association brands-products, and listing of branded products.
 </p>
 
@@ -65,18 +73,30 @@ It allows you to add a custom “Brand” resource, with those features :
     ```
     bin/console cache:clear
     ```
-4. Run the migration
-    ```
-    bin/console doctrine:migrations:migrate
-    ```
-    > **Note:** It will execute the migration Version20250417083939 from the plugin.
 
-5. Load the fixtures:
+4. Check if a migration is available:
+   ```
+   bin/console doctrine:migrations:list
+   ```
+   > **Note:** Available migrations have the status "not migrated".
+
+   If not, create a new migration file:
+   ```
+   bin/console doctrine:migrations:diff
+   ```
+   >**Note:** Choose namespace ```[0] App\Migrations```.
+
+5. Run the migration
+   ```
+   bin/console doctrine:migrations:migrate
+   ```
+
+6. Load the fixtures:
     ```
     bin/console sylius:fixtures:load -n
     ```
 
-6. Play with your brand new "Brand" resource! 
+7. Play with your brand new "Brand" resource! 
 
 ---
 
